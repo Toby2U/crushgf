@@ -20,7 +20,7 @@ export default function Crushes() {
     { id: "create", name: "Create Your Own", desc: "Build your perfect crush", vibe: "Any look & personality" },
   ];
 
-  const openChat = (id) => {
+  const openChat = (id: string) => {
     if (id === "create") {
       alert("Create Your Own Crush - Coming soon!");
       return;
@@ -33,16 +33,18 @@ export default function Crushes() {
       minHeight: '100vh',
       background: '#0a0519',
       color: 'white',
-      padding: '60px 20px',
+      padding: '40px 15px',
       textAlign: 'center'
     }}>
-      <h1 style={{ fontSize: '3.2rem', marginBottom: '3rem' }}>Choose Your Crush</h1>
+      <h1 style={{ fontSize: 'clamp(2rem, 6vw, 3.2rem)', marginBottom: '2rem' }}>
+        Choose Your Crush
+      </h1>
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-        gap: '24px',
-        maxWidth: '1300px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+        gap: '18px',
+        maxWidth: '1200px',
         margin: '0 auto'
       }}>
         {crushes.map((crush) => (
@@ -52,17 +54,32 @@ export default function Crushes() {
             style={{
               backgroundColor: 'rgba(255,255,255,0.08)',
               borderRadius: '16px',
-              padding: '28px 20px',
+              padding: '20px 12px',
               cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
             }}
           >
-            <div style={{ fontSize: '58px', marginBottom: '16px' }}>
+            <div style={{ 
+              fontSize: 'clamp(42px, 8vw, 58px)', 
+              marginBottom: '12px',
+              lineHeight: 1 
+            }}>
               {crush.id === "create" ? "✨" : "👤"}
             </div>
-            <h3 style={{ fontSize: '1.6rem', marginBottom: '8px' }}>{crush.name}</h3>
-            <p style={{ fontSize: '1.1rem', marginBottom: '6px', opacity: 0.9 }}>{crush.desc}</p>
-            <p style={{ fontSize: '0.95rem', opacity: 0.75 }}>{crush.vibe}</p>
+            <h3 style={{ fontSize: 'clamp(1.2rem, 4vw, 1.6rem)', marginBottom: '6px' }}>
+              {crush.name}
+            </h3>
+            <p style={{ fontSize: '1rem', marginBottom: '4px', opacity: 0.9 }}>
+              {crush.desc}
+            </p>
+            <p style={{ fontSize: '0.85rem', opacity: 0.75 }}>
+              {crush.vibe}
+            </p>
           </div>
         ))}
       </div>
