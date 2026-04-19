@@ -24,7 +24,7 @@ export default function Home() {
         zIndex: -1
       }} />
 
-      {/* Age Gate - Mobile friendly */}
+      {/* Age Gate */}
       {!isVerified && (
         <div style={{
           position: 'fixed',
@@ -38,11 +38,11 @@ export default function Home() {
         }}>
           <div style={{
             backgroundColor: '#1a1a2e',
-            padding: '40px 30px',
+            padding: '40px 25px',
             borderRadius: '24px',
             textAlign: 'center',
-            maxWidth: '420px',
             width: '100%',
+            maxWidth: '420px',
             border: '3px solid #ff3366'
           }}>
             <h1 style={{ fontSize: '2.4rem', color: '#ff3366', marginBottom: '1.2rem' }}>
@@ -51,7 +51,7 @@ export default function Home() {
             <p style={{ fontSize: '1.25rem', color: '#ddd', marginBottom: '2.5rem' }}>
               Start your free trial with an AI crush
             </p>
-            <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '15px', flexDirection: 'column', alignItems: 'center' }}>
               <button 
                 onClick={handleYes}
                 style={{
@@ -63,8 +63,8 @@ export default function Home() {
                   borderRadius: '50px',
                   cursor: 'pointer',
                   fontWeight: '700',
-                  flex: '1 1 auto',
-                  maxWidth: '180px'
+                  width: '100%',
+                  maxWidth: '280px'
                 }}
               >
                 Yes, I am 18+
@@ -79,8 +79,8 @@ export default function Home() {
                   border: '2px solid #777',
                   borderRadius: '50px',
                   cursor: 'pointer',
-                  flex: '1 1 auto',
-                  maxWidth: '180px'
+                  width: '100%',
+                  maxWidth: '280px'
                 }}
               >
                 No
@@ -90,7 +90,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Main Landing Page - Mobile friendly */}
+      {/* Main Landing */}
       {isVerified && (
         <div style={{
           minHeight: '100vh',
@@ -129,7 +129,8 @@ export default function Home() {
               fontWeight: '700',
               width: '100%',
               maxWidth: '320px',
-              margin: '0 auto'
+              margin: '0 auto',
+              display: 'block'
             }}>
               Start Free Trial
             </button>
