@@ -17,50 +17,54 @@ export default function Home() {
       {/* Blurry background */}
       <div style={{
         position: 'fixed',
-        top: 0, left: 0, right: 0, bottom: 0,
+        inset: 0,
         backgroundImage: `url('https://picsum.photos/id/1011/2000/1200'), url('https://picsum.photos/id/1027/2000/1200')`,
         backgroundSize: 'cover',
         filter: 'blur(28px) brightness(0.45)',
         zIndex: -1
       }} />
 
-      {/* Age Gate Popup */}
+      {/* Age Gate - Mobile friendly */}
       {!isVerified && (
         <div style={{
           position: 'fixed',
-          top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: 'rgba(10, 5, 25, 0.96)',
+          inset: 0,
+          backgroundColor: 'rgba(10,5,25,0.96)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          padding: '20px',
           zIndex: 1000
         }}>
           <div style={{
             backgroundColor: '#1a1a2e',
-            padding: '70px 55px',
+            padding: '40px 30px',
             borderRadius: '24px',
             textAlign: 'center',
-            maxWidth: '480px',
+            maxWidth: '420px',
+            width: '100%',
             border: '3px solid #ff3366'
           }}>
-            <h1 style={{ fontSize: '2.8rem', color: '#ff3366', marginBottom: '1.5rem' }}>
+            <h1 style={{ fontSize: '2.4rem', color: '#ff3366', marginBottom: '1.2rem' }}>
               Are you 18+?
             </h1>
-            <p style={{ fontSize: '1.35rem', color: '#ddd', marginBottom: '3rem' }}>
+            <p style={{ fontSize: '1.25rem', color: '#ddd', marginBottom: '2.5rem' }}>
               Start your free trial with an AI crush
             </p>
-            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button 
                 onClick={handleYes}
                 style={{
-                  padding: '20px 55px',
-                  fontSize: '1.35rem',
+                  padding: '18px 50px',
+                  fontSize: '1.25rem',
                   background: '#ff3366',
                   color: 'white',
                   border: 'none',
                   borderRadius: '50px',
                   cursor: 'pointer',
-                  fontWeight: '700'
+                  fontWeight: '700',
+                  flex: '1 1 auto',
+                  maxWidth: '180px'
                 }}
               >
                 Yes, I am 18+
@@ -68,13 +72,15 @@ export default function Home() {
               <button 
                 onClick={handleNo}
                 style={{
-                  padding: '20px 55px',
-                  fontSize: '1.35rem',
+                  padding: '18px 50px',
+                  fontSize: '1.25rem',
                   background: 'transparent',
                   color: '#ddd',
                   border: '2px solid #777',
                   borderRadius: '50px',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  flex: '1 1 auto',
+                  maxWidth: '180px'
                 }}
               >
                 No
@@ -84,41 +90,53 @@ export default function Home() {
         </div>
       )}
 
-      {/* Main Landing Page (shows after Yes) */}
+      {/* Main Landing Page - Mobile friendly */}
       {isVerified && (
         <div style={{
           minHeight: '100vh',
-          padding: '140px 20px',
+          padding: '80px 20px',
           textAlign: 'center',
           color: '#f0e6ff',
           fontFamily: 'system-ui, -apple-system, sans-serif'
         }}>
-          <h1 style={{ fontSize: '5.4rem', fontWeight: '700', marginBottom: '1.2rem' }}>
+          <h1 style={{ 
+            fontSize: 'clamp(2.8rem, 8vw, 5.4rem)', 
+            fontWeight: '700', 
+            marginBottom: '1rem',
+            lineHeight: 1.1
+          }}>
             CrushGF.ai
           </h1>
-          <p style={{ fontSize: '2.1rem', marginBottom: '4rem', opacity: 0.95 }}>
+          <p style={{ 
+            fontSize: 'clamp(1.4rem, 5vw, 2.1rem)', 
+            marginBottom: '3rem', 
+            opacity: 0.95,
+            lineHeight: 1.3
+          }}>
             Start your free trial.<br />
             Chat. Flirt. Then add real SMS texts.
           </p>
 
           <Link href="/crushes">
             <button style={{
-              padding: '24px 85px',
-              fontSize: '1.5rem',
+              padding: '20px 60px',
+              fontSize: '1.4rem',
               background: 'linear-gradient(to right, #7b2cbf, #c026d3)',
               color: 'white',
               border: 'none',
               borderRadius: '60px',
               cursor: 'pointer',
               fontWeight: '700',
-              boxShadow: '0 15px 45px rgba(123, 44, 191, 0.5)'
+              width: '100%',
+              maxWidth: '320px',
+              margin: '0 auto'
             }}>
               Start Free Trial
             </button>
           </Link>
 
-          <p style={{ marginTop: '5rem', opacity: 0.7, fontSize: '1.1rem' }}>
-            No credit card required to start • Real SMS add-on available
+          <p style={{ marginTop: '4rem', opacity: 0.7, fontSize: '1rem' }}>
+            No credit card required • Real SMS add-on available
           </p>
         </div>
       )}
