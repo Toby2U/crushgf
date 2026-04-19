@@ -1,38 +1,127 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(145deg, #0a0519 0%, #1f0f33 100%)',
-      color: '#e0d4ff',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-      padding: '120px 20px',
-      textAlign: 'center'
-    }}>
-      <h1 style={{ fontSize: '5.2rem', fontWeight: '700', marginBottom: '1.5rem' }}>
-        CrushGF.ai
-      </h1>
-      <p style={{ fontSize: '2rem', marginBottom: '4rem', opacity: 0.9 }}>
-        Your AI crush is waiting
-      </p>
+  const [isVerified, setIsVerified] = useState(false);
 
-      <Link href="/crushes">
-        <button style={{
-          padding: '24px 80px',
-          fontSize: '1.5rem',
-          background: 'linear-gradient(to right, #7b2cbf, #c026d3)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '60px',
-          cursor: 'pointer',
-          fontWeight: '700'
+  const handleYes = () => setIsVerified(true);
+  const handleNo = () => {
+    alert("You must be 18 or older to enter.");
+    window.location.href = "https://www.google.com";
+  };
+
+  return (
+    <>
+      {/* Blurry background */}
+      <div style={{
+        position: 'fixed',
+        top: 0, left: 0, right: 0, bottom: 0,
+        backgroundImage: `url('https://picsum.photos/id/1011/2000/1200'), url('https://picsum.photos/id/1027/2000/1200')`,
+        backgroundSize: 'cover',
+        filter: 'blur(28px) brightness(0.45)',
+        zIndex: -1
+      }} />
+
+      {/* Age Gate Popup */}
+      {!isVerified && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(10, 5, 25, 0.96)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000
         }}>
-          Browse All Crushes
-        </button>
-      </Link>
-    </div>
+          <div style={{
+            backgroundColor: '#1a1a2e',
+            padding: '70px 55px',
+            borderRadius: '24px',
+            textAlign: 'center',
+            maxWidth: '480px',
+            border: '3px solid #ff3366'
+          }}>
+            <h1 style={{ fontSize: '2.8rem', color: '#ff3366', marginBottom: '1.5rem' }}>
+              Are you 18+?
+            </h1>
+            <p style={{ fontSize: '1.35rem', color: '#ddd', marginBottom: '3rem' }}>
+              Start your free trial with an AI crush
+            </p>
+            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+              <button 
+                onClick={handleYes}
+                style={{
+                  padding: '20px 55px',
+                  fontSize: '1.35rem',
+                  background: '#ff3366',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '50px',
+                  cursor: 'pointer',
+                  fontWeight: '700'
+                }}
+              >
+                Yes, I am 18+
+              </button>
+              <button 
+                onClick={handleNo}
+                style={{
+                  padding: '20px 55px',
+                  fontSize: '1.35rem',
+                  background: 'transparent',
+                  color: '#ddd',
+                  border: '2px solid #777',
+                  borderRadius: '50px',
+                  cursor: 'pointer'
+                }}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Landing Page (shows after Yes) */}
+      {isVerified && (
+        <div style={{
+          minHeight: '100vh',
+          padding: '140px 20px',
+          textAlign: 'center',
+          color: '#f0e6ff',
+          fontFamily: 'system-ui, -apple-system, sans-serif'
+        }}>
+          <h1 style={{ fontSize: '5.4rem', fontWeight: '700', marginBottom: '1.2rem' }}>
+            CrushGF.ai
+          </h1>
+          <p style={{ fontSize: '2.1rem', marginBottom: '4rem', opacity: 0.95 }}>
+            Start your free trial.<br />
+            Chat. Flirt. Then add real SMS texts.
+          </p>
+
+          <Link href="/crushes">
+            <button style={{
+              padding: '24px 85px',
+              fontSize: '1.5rem',
+              background: 'linear-gradient(to right, #7b2cbf, #c026d3)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '60px',
+              cursor: 'pointer',
+              fontWeight: '700',
+              boxShadow: '0 15px 45px rgba(123, 44, 191, 0.5)'
+            }}>
+              Start Free Trial
+            </button>
+          </Link>
+
+          <p style={{ marginTop: '5rem', opacity: 0.7, fontSize: '1.1rem' }}>
+            No credit card required to start • Real SMS add-on available
+          </p>
+        </div>
+      )}
+    </>
   );
 }
