@@ -20,7 +20,7 @@ export default function Chat() {
   const crush = crushInfo[crushId] || { name: "Crush", desc: "Your AI Companion" };
 
   const [messages, setMessages] = useState([
-    { role: "assistant", content: `Hey... I've been thinking about you 😊` }
+    { role: "assistant", content: `Hey... I've been thinking about you all day 😊 What’s on your mind?` }
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -29,21 +29,24 @@ export default function Chat() {
     if (!input.trim()) return;
 
     setMessages(prev => [...prev, { role: "user", content: input }]);
+    const userMessage = input;
     setInput("");
     setIsTyping(true);
 
+    // Much more natural replies
     setTimeout(() => {
-      const replies = [
-        "Mmm, I was hoping you'd message me...",
-        "You always know how to make me smile ❤️",
-        "Tell me more... I'm listening 😏",
-        "You're making my heart race right now...",
+      const naturalReplies = [
+        `Mmm... I was literally just smiling thinking about you. Tell me more...`,
+        `You're making me blush right now ❤️ What are you up to today?`,
+        `God, you always know exactly what to say to me. I'm all ears...`,
+        `I’ve been waiting for you to message me. How’s your day going so far?`,
+        `That made me smile so big. You have no idea how much I like talking to you.`,
       ];
-      const randomReply = replies[Math.floor(Math.random() * replies.length)];
+      const reply = naturalReplies[Math.floor(Math.random() * naturalReplies.length)];
 
-      setMessages(prev => [...prev, { role: "assistant", content: randomReply }]);
+      setMessages(prev => [...prev, { role: "assistant", content: reply }]);
       setIsTyping(false);
-    }, 1200);
+    }, 1100);
   };
 
   return (
@@ -55,6 +58,7 @@ export default function Chat() {
       fontFamily: 'system-ui, -apple-system, sans-serif',
       color: '#f0e6ff'
     }}>
+      {/* Header */}
       <div style={{
         padding: '16px 20px',
         background: '#1f0f33',
@@ -63,54 +67,50 @@ export default function Chat() {
         alignItems: 'center',
         gap: '16px'
       }}>
-        <div style={{ fontSize: '32px' }}>👤</div>
+        <button onClick={() => window.location.href = '/crushes'} style={{ fontSize: '28px', background: 'none', border: 'none', color: '#aaa' }}>
+          ←
+        </button>
         <div>
-          <div style={{ fontSize: '1.4rem', fontWeight: '600' }}>{crush.name}</div>
+          <div style={{ fontSize: '1.5rem', fontWeight: '700' }}>{crush.name}</div>
           <div style={{ fontSize: '0.95rem', opacity: 0.7 }}>{crush.desc}</div>
         </div>
       </div>
 
+      {/* Messages */}
       <div style={{
         flex: 1,
         padding: '20px',
         overflowY: 'auto',
         display: 'flex',
         flexDirection: 'column',
-        gap: '16px'
+        gap: '14px'
       }}>
-        {messages.map((msg, index) => (
+        {messages.map((msg, i) => (
           <div
-            key={index}
+            key={i}
             style={{
               alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-              maxWidth: '75%',
+              maxWidth: '80%',
               padding: '14px 18px',
               borderRadius: '18px',
               backgroundColor: msg.role === 'user' ? '#ff4da6' : '#2a1f4d',
               color: 'white',
-              borderBottomRightRadius: msg.role === 'user' ? '4px' : '18px',
-              borderBottomLeftRadius: msg.role === 'user' ? '18px' : '4px'
             }}
           >
             {msg.content}
           </div>
         ))}
-
-        {isTyping && (
-          <div style={{ alignSelf: 'flex-start', padding: '14px 18px', opacity: 0.7 }}>
-            {crush.name} is typing...
-          </div>
-        )}
+        {isTyping && <div style={{ alignSelf: 'flex-start', color: '#888' }}>{crush.name} is typing...</div>}
       </div>
 
+      {/* Input */}
       <div style={{
         padding: '16px',
         backgroundColor: '#1f0f33',
         borderTop: '1px solid #ff4da6'
       }}>
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div style={{ display: 'flex', gap: '10px' }}>
           <input
-            type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
@@ -128,13 +128,13 @@ export default function Chat() {
           <button 
             onClick={sendMessage}
             style={{
-              padding: '0 28px',
+              padding: '0 32px',
               backgroundColor: '#ff4da6',
               color: 'white',
               border: 'none',
               borderRadius: '50px',
-              cursor: 'pointer',
-              fontWeight: '600'
+              fontWeight: '600',
+              cursor: 'pointer'
             }}
           >
             Send
